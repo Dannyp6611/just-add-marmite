@@ -9,6 +9,8 @@ const client = createClient({
   accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN,
 });
 
+export const revalidate = 1;
+
 export const generateStaticParams = async () => {
   const res = await client.getEntries({ content_type: "recipe" });
   const recipes = res.items;

@@ -3,6 +3,8 @@ import { createClient } from "contentful";
 
 import styles from "./page.module.css";
 
+export const revalidate = 1;
+
 export default async function Recipes() {
   const client = createClient({
     space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
