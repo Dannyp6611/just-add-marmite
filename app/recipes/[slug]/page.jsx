@@ -34,10 +34,6 @@ const RecipeDetailsPage = async ({ params }) => {
 
   const recipe = res.items[0];
 
-  if (!recipe) {
-    <Skeleton />;
-  }
-
   // destructure from recipe
   const { featuredImage, title, cookingTime, ingredients, method } =
     recipe.fields;

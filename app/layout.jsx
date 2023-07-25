@@ -5,6 +5,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 import { Roboto } from "next/font/google";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -22,11 +24,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <div className="layout">
-          <Header />
-          <div className="page-content">{children}</div>
-          <Footer />
-        </div>
+        <Suspense fallback={<Loading />}>
+          <div className="layout">
+            <Header />
+            <div className="page-content">{children}</div>
+            <Footer />
+          </div>
+        </Suspense>
       </body>
     </html>
   );
