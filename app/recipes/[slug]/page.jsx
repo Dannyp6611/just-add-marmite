@@ -3,6 +3,7 @@ import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 import styles from "./page.module.css";
+import Skeleton from "@/components/Skeleton";
 
 const client = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
@@ -10,6 +11,7 @@ const client = createClient({
 });
 
 export const revalidate = 1;
+export const dynamicParams = true;
 
 export const generateStaticParams = async () => {
   const res = await client.getEntries({ content_type: "recipe" });
@@ -31,6 +33,10 @@ const RecipeDetailsPage = async ({ params }) => {
   });
 
   const recipe = res.items[0];
+
+  if (!recipe) {
+    <Skeleton />;
+  }
 
   // destructure from recipe
   const { featuredImage, title, cookingTime, ingredients, method } =
